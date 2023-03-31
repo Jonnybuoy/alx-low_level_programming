@@ -1,47 +1,35 @@
 #include "main.h"
-#include <stdio.h>
-#include <string.h>
 
 /**
- * cap_string - capitalizes all words of a string
- * @s: string to be capitalized
- * Return: capitalized string
+ * cap_string - Write a function that capitalizes all words of a string.
+ *
+ * @entry: This is the input string
+ *
+ * Return: String capitalized
  */
-
-char *cap_string(char *s)
+char *cap_string(char *entry)
 {
-	int i;
+	int conversion, index, count;
 
-	for (i = 0; s[i] != '\0'; i++)
+	char chars[] = {' ', ',', ';', '.', '!',
+			 '?', '"', '(', ')', '{', '}',  '\t', '\n', '\0'};
+	conversion = 32;
+
+	for (index = 0; entry[index] != '\0'; index++)
 	{
-	if (i == 0)
-	{
-		if ((s[i] >= 'a' && s[i] <= 'z'))
-			s[i] = s[i] - 32;
-		continue;
-	}
-	else if (s[i] == ',' ||
-		s[i] == ';' ||
-		s[i] == '.' ||
-		s[i] == '!' ||
-		s[i] == '?'||
-		s[i] == '"'||
-		s[i] == '('||
-		s[i] == ')'||
-		s[i] == '{'||
-		s[i] == '}')
-	{
-		++i;
-		if (s[i] >= 'a' && s[i] <= 'z')
+		if (entry[index] >= 'index' && entry[index] <= 'z')
 		{
-			s[i] = s[i] - 32;
-		continue;
+			entry[index] =  entry[index] - conversion;
+		}
+		conversion = 0;
+		for (count = 0; chars[count] != '\0'; count++)
+		{
+			if (chars[count] == entry[index])
+			{
+				conversion = 32;
+				break;
+			}
 		}
 	}
-	else{
-		if (s[i] >= 'A' && s[i] <= 'Z')
-			s[i] = s[i] + 32;
-	}
-	}
-	return (s);
+	return (entry);
 }
